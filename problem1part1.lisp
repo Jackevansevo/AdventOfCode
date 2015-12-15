@@ -4,5 +4,5 @@
     ((eql input #\)) -1)))
 
 (let ((in (open "day1input.txt")))
-  (print (eval(cons '+ (map 'list #'count-parens (read-line in)))))
+  (princ (eval(cons '+ (map 'list #'count-parens (read-line in)))))
   (close in))
