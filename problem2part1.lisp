@@ -20,7 +20,7 @@
 ;; Open the file and loop through each line
 (defun read-in-file (filename)
   (with-open-file (in filename)
-    (loop for line = (read-line in nil) with total = 0
+    (loop for line = (read-line in nil)
           while line
           collect line)))
 
