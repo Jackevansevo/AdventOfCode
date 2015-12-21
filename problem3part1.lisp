@@ -19,7 +19,7 @@
 (defun travel-routes (vectors)
   (let ((pos '(0 0)))
     (let ((stops (map 'list (travel pos) vectors)))
-        (length (remove-duplicates(append (list pos) stops) :test #'equal)))))
+      (length (remove-duplicates(append (list pos) stops) :test #'equal)))))
 
 
 ;; Travels down a route
