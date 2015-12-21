@@ -25,9 +25,9 @@
 ;; Travels down a route
 (defun travel (pos)
   (lambda (vec)
-    (let ((newX (list(eval (+ (car vec) (car pos)))))
-          (newY (list(eval (+ (cadr vec) (cadr pos))))))
-      (setq pos (append newX newY))
+    (let ((newX (+ (car vec) (car pos)))
+          (newY (+ (cadr vec) (cadr pos))))
+      (setq pos (list newX newY))
       pos)))
 
 
