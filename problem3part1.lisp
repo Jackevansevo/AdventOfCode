@@ -14,27 +14,17 @@
     ((eql direction #\v) '(0 -1))
     ((eql direction #\<) '(-1 0))))
 
-;; [TODO] Rewrite this using recursion instead of maps baby
 
-; ;; Travels down each route collecting a list of pos
-; (defun travel-routes (vectors)
-;   (let ((pos '(0 0)))
-;     (let ((stops (map 'list (travel pos) vectors)))
-;       (length (remove-duplicates(append (list pos) stops) :test #'equal)))))
+;; Travel down each route recursively
+(defun get-stops (vecs &key (stops (list '(0 0))))
+  (if vecs
+    (let ((newX (+ (car (first vecs)) (car (first stops))))
+          (newY (+ (cadr (first vecs)) (cadr (first stops)))))
+      (get-stops (rest vecs) :stops (cons (list newX newY) stops)))
+    (length(remove-duplicates stops :test #'equal))))
 
-
-; ;; Travels down a route
-; (defun travel (pos)
-;   (lambda (vec)
-;     (let ((newX (+ (car vec) (car pos)))
-;           (newY (+ (cadr vec) (cadr pos))))
-;       (setq pos (list newX newY))
-;       pos)))
-
-(defun travel-routes (vectors)
-  (format t "List of vectors: ~d~%" vectors))
 
 ;; Map through each direction in the list
 (let ((directions-list (read-in-file "day3input.txt")))
   (let ((vectors (remove nil(map 'list #'get-direction directions-list))))
-    (travel-routes vectors)))
+    (format t "~d~%" (get-stops vectors))))
